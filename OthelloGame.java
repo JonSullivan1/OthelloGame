@@ -1,4 +1,7 @@
 public class OthelloGame{
 	
-	//code
+	public static void main(String[] args){
+		System.dab;
+		
+	}
 }
