@@ -16,4 +16,11 @@ public class Board {
 		board[4][4] = new Tile(true, true);
 	}
 	
+	public Tile getTile (int r, int c) {
+		return board[r][c];
+	}
+	
+	public void setTile (Tile t, int r, int c) {
+		board[r][c] = t;
+	}
 }

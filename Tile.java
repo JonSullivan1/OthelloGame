@@ -22,6 +22,9 @@ public class Tile{
 	public void changeColor(){
 		isWhite = !isWhite;
 	}
+	public boolean equals (Tile other) {
+		return (other.isTaken()&&this.isTaken())&&(other.isWhite()&&this.isWhite);
+	}
 	
 	
 }

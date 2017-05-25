@@ -13,5 +13,9 @@ public class OthelloGame{
 		return !(board.getTile(r, c).isTaken())
 	}
 	
+	public void updateBoard(int r1, int r2, int c1, int c2) {
+		
+	}
+	
 	
 }
