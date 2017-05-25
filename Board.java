@@ -15,4 +15,5 @@ public class Board {
 		board[4][3] = new Tile(true, false);
 		board[4][4] = new Tile(true, true);
 	}
+	
 }
