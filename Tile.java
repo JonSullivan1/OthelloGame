@@ -13,5 +13,16 @@ public class Tile{
 	}
 	
 	
+	public boolean isTaken(){
+		return used;
+	}
+	public boolean white(){
+		return isWhite;
+	}
+	
+	public void changeColor(){
+		isWhite = !isWhite;
+	}
+	
 	
 }
