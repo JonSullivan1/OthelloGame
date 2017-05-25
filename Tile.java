@@ -2,16 +2,15 @@ public class Tile{
 	private boolean used;
 	private boolean isWhite;
 	
-	Tile(){
+	public Tile(){
 		used = false;
 		isWhite = true;
 	}
 	
-	Tile(boolean used, boolean isWhite){
+	public Tile(boolean used, boolean isWhite){
 		this.used = used;
 		this.isWhite = isWhite;
 	}
-	
 	
 	public boolean isTaken(){
 		return used;
