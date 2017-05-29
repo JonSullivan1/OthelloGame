@@ -55,10 +55,6 @@ public class Board {
 			if((isWhite != board[r][i].isWhite()) && board[r][i].isTaken()){
 				mid = true;
 			}
-			else if(!(board[r][i].isTaken())){
-				mid = false;
-				break;
-			}
 			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
 				return true && !(board[r][c].isTaken());
 			}
@@ -69,10 +65,6 @@ public class Board {
 			if((isWhite != board[r][i].isWhite()) && board[r][i].isTaken()){
 				mid = true;
 			}
-			else if(!(board[r][i].isTaken())){
-				mid = false;
-				break;
-			}
 			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
 				return true && !(board[r][c].isTaken());
 			}
@@ -81,10 +73,6 @@ public class Board {
 		for(int i = r;i<board[0].length;i++){
 			if((isWhite != board[i][c].isWhite()) && board[i][c].isTaken()){
 				mid = true;
-			}
-			else if(!(board[i][c].isTaken())){
-				mid = false;
-				break;
 			}
 			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].isWhite()){
 				return true && !(board[r][c].isTaken());
@@ -95,10 +83,7 @@ public class Board {
 			if((isWhite != board[i][c].isWhite()) && board[i][c].isTaken()){
 				mid = true;
 			}
-			else if(!(board[i][c].isTaken())){
-				mid = false;
-				break;
-			}
+
 			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].isWhite()){
 				return true && !(board[r][c].isTaken());
 			}
