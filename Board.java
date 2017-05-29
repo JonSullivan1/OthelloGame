@@ -54,7 +54,7 @@ public class Board {
 				mid = true;
 			}
 			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
-				return true;
+				return true && !(board[r][c].isTaken);
 			}
 		}
 		mid = false;
@@ -63,7 +63,7 @@ public class Board {
 				mid = true;
 			}
 			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
-				return true;
+				return true && !(board[r][c].isTaken);
 			}
 		}
 		mid = false;
@@ -72,7 +72,7 @@ public class Board {
 				mid = true;
 			}
 			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].isWhite()){
-				return true;
+				return true && !(board[r][c].isTaken);
 			}
 		}
 		mid = false;
@@ -81,7 +81,7 @@ public class Board {
 				mid = true;
 			}
 			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].isWhite()){
-				return true;
+				return true && !(board[r][c].isTaken);
 			}
 		}
 		
