@@ -1,3 +1,5 @@
+
+
 import java.awt.List;
 import java.util.ArrayList;
 
@@ -53,17 +55,26 @@ public class Board {
 			if((isWhite != board[r][i].isWhite()) && board[r][i].isTaken()){
 				mid = true;
 			}
-			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
-				return true && !(board[r][c].isTaken);
+			else if(!(board[r][i].isTaken())){
+				mid = false;
+				break;
 			}
+			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
+				return true && !(board[r][c].isTaken());
+			}
+			
 		}
 		mid = false;
 		for(int i = c;i>=0;i--){
 			if((isWhite != board[r][i].isWhite()) && board[r][i].isTaken()){
 				mid = true;
 			}
+			else if(!(board[r][i].isTaken())){
+				mid = false;
+				break;
+			}
 			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
-				return true && !(board[r][c].isTaken);
+				return true && !(board[r][c].isTaken());
 			}
 		}
 		mid = false;
@@ -71,8 +82,12 @@ public class Board {
 			if((isWhite != board[i][c].isWhite()) && board[i][c].isTaken()){
 				mid = true;
 			}
+			else if(!(board[i][c].isTaken())){
+				mid = false;
+				break;
+			}
 			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].isWhite()){
-				return true && !(board[r][c].isTaken);
+				return true && !(board[r][c].isTaken());
 			}
 		}
 		mid = false;
@@ -80,8 +95,12 @@ public class Board {
 			if((isWhite != board[i][c].isWhite()) && board[i][c].isTaken()){
 				mid = true;
 			}
+			else if(!(board[i][c].isTaken())){
+				mid = false;
+				break;
+			}
 			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].isWhite()){
-				return true && !(board[r][c].isTaken);
+				return true && !(board[r][c].isTaken());
 			}
 		}
 		
@@ -101,5 +120,7 @@ public class Board {
 		}
 		board[r][c] = new Tile(true, isWhite);
 	}
+	
+
 
 }
