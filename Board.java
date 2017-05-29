@@ -1,3 +1,6 @@
+import java.awt.List;
+import java.util.ArrayList;
+
 public class Board {
 	private Tile[][] board;
 
@@ -47,37 +50,37 @@ public class Board {
 		boolean possible = true;
 		boolean mid = false;
 		for(int i = c;i<board.length;i++){
-			if((isWhite != board[r][i].white()) && board[r][i].isTaken()){
+			if((isWhite != board[r][i].isWhite()) && board[r][i].isTaken()){
 				mid = true;
 			}
-			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].white()){
+			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
 				return true;
 			}
 		}
 		mid = false;
 		for(int i = c;i>=0;i--){
-			if((isWhite != board[r][i].white()) && board[r][i].isTaken()){
+			if((isWhite != board[r][i].isWhite()) && board[r][i].isTaken()){
 				mid = true;
 			}
-			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].white()){
+			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
 				return true;
 			}
 		}
 		mid = false;
 		for(int i = r;i<board[0].length;i++){
-			if((isWhite != board[i][c].white()) && board[i][c].isTaken()){
+			if((isWhite != board[i][c].isWhite()) && board[i][c].isTaken()){
 				mid = true;
 			}
-			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].white()){
+			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].isWhite()){
 				return true;
 			}
 		}
 		mid = false;
 		for(int i = r;i>board[0].length;i--){
-			if((isWhite != board[i][c].white()) && board[i][c].isTaken()){
+			if((isWhite != board[i][c].isWhite()) && board[i][c].isTaken()){
 				mid = true;
 			}
-			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].white()){
+			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].isWhite()){
 				return true;
 			}
 		}
@@ -86,51 +89,17 @@ public class Board {
 		
 		}
 	
-	public void updateBoard(int r, int c, boolean isWhite) {
-		int rTemp = r;
-		int cTemp = c;
-		if (board[r][c].isTaken()) {
-			for (int i = 0; i < 8; i++) {
-				if(i = 0) {
-					int j = r;
-					while (j >= 0) {
-						j--;
-						if (board[j][c].isWhite() == !isWhite) {
-							board[j][c].changeColor();
-						}
-						else {
-							break;
-						}
-					}
-				}
-				if(i = 1) {
-					int j = r;
-					int k = c;
-					while (j >= 0 && k >= 0) {
-						j--;
-						k--;
-						if (board[j][k].isWhite() == !isWhite) {
-							board[j][k].changeColor();
-						}
-						else {
-							break;
-						}
-					}
-				}
-				if(i = 2) {
-					int k = c;
-					while (c < board[0].length) {
-						j--;
-						if (board[r][k].isTaken() && board[r][k].isWhite() == !isWhite) {
-							board[r][k].changeColor();
-						}
-						else {
-							break;
-						}
-					}
-				}
+	public void updateBoard(int r, int c, boolean isWhite){
+		boolean toUpdate = false;
+		for(int  i =0; i<8; i++){
+			for(int j =0;j<8;j++){
+				if(board[r+ sOFFSET_MOVE_ROW[i]][c+sOFFSET_MOVE_COL[j]].isTaken() && (isWhite != board[r+ sOFFSET_MOVE_ROW[i]][c+sOFFSET_MOVE_COL[j]].isWhite())){
+					//If a valid tile is taken and the opposite color
+					board[r+ sOFFSET_MOVE_ROW[i]][c+sOFFSET_MOVE_COL[j]].changeColor();
 			}
 		}
+		}
+		board[r][c] = new Tile(true, isWhite);
 	}
 
 }
