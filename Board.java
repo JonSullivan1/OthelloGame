@@ -1,5 +1,3 @@
-
-
 import java.awt.List;
 import java.util.ArrayList;
 
@@ -8,14 +6,11 @@ public class Board {
 
 	private int length;
 	private int width;
-
-
 	/** move offset for row */
 	private static final int[] sOFFSET_MOVE_ROW = {-1, -1, -1,  0,  0,  1,  1,  1};
-
 	/** move offset for column */
 	private static final int[] sOFFSET_MOVE_COL = {-1,  0,  1, -1,  1, -1,  0,  1};
-
+	
 	public Board() {
 		board = new Tile[8][8];
 		length = 8;
@@ -31,7 +26,7 @@ public class Board {
 		board[4][3] = new Tile(true, false);
 		board[4][4] = new Tile(true, true);
 	}
-
+	
 	public Tile getTile (int r, int c) {
 		return board[r][c];
 	}
@@ -41,86 +36,60 @@ public class Board {
 	public int getWidth(){
 		return width;
 	}
-
+	
 	public void setTile (Tile t, int r, int c) {
 		board[r][c] = t;
 	}
+	
 
-
-
-	public boolean checkMove(int r, int c, boolean isWhite){
-		boolean possible = true;
-		boolean mid = false;
-		for(int i = c;i<board.length;i++){
-			if((isWhite != board[r][i].isWhite()) && board[r][i].isTaken()){
-				mid = true;
-			}
-			else if(!(board[r][i].isTaken())){
-				mid = false;
-				break;
-			}
-			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
-				return true && !(board[r][c].isTaken());
-			}
-
+	
+	/*public boolean checkMove(int r, int c, boolean isWhite){
+		return isWhite;
+			
+	}*./
+		
+		
+		
+		
+	/*public void updateBoard(int r, int c, boolean isWhite){
+		if(board[r][c].isTaken() && board[r][c].isWhite() != isWhite){
+			board[r][c].take();
+			board[r][c].changeColor();
 		}
-		mid = false;
-		for(int i = c;i>=0;i--){
-			if((isWhite != board[r][i].isWhite()) && board[r][i].isTaken()){
-				mid = true;
-			}
-			else if(!(board[r][i].isTaken())){
-				mid = false;
-				break;
-			}
-			else if(mid && board[r][i].isTaken() && isWhite == board[r][i].isWhite()){
-				return true && !(board[r][c].isTaken());
-			}
+		else if(!board[r][c].isTaken()){
+			board[r][c].take();
+			board[r][c].changeIsWhite(isWhite);
+			System.out.println("TAKEN");
 		}
-		mid = false;
-		for(int i = r;i<board[0].length;i++){
-			if((isWhite != board[i][c].isWhite()) && board[i][c].isTaken()){
-				mid = true;
-			}
-			else if(!(board[i][c].isTaken())){
-				mid = false;
-				break;
-			}
-			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].isWhite()){
-				return true && !(board[r][c].isTaken());
-			}
-		}
-		mid = false;
-		for(int i = r;i>board[0].length;i--){
-			if((isWhite != board[i][c].isWhite()) && board[i][c].isTaken()){
-				mid = true;
-			}
-			else if(!(board[i][c].isTaken())){
-				mid = false;
-				break;
-			}
-			else if(mid && board[i][c].isTaken() && isWhite == board[i][c].isWhite()){
-				return true && !(board[r][c].isTaken());
-			}
-		}
-
-		return false;
-
-	}
-
-	public void updateBoard(int r, int c, boolean isWhite){
-		boolean toUpdate = false;
-		for(int  i =0; i<8; i++){
-			for(int j =0;j<8;j++){
-				if(board[r+ sOFFSET_MOVE_ROW[i]][c+sOFFSET_MOVE_COL[j]].isTaken() && (isWhite != board[r+ sOFFSET_MOVE_ROW[i]][c+sOFFSET_MOVE_COL[j]].isWhite())){
-					//If a valid tile is taken and the opposite color
-					board[r+ sOFFSET_MOVE_ROW[i]][c+sOFFSET_MOVE_COL[j]].changeColor();
+	}*/
+	public boolean availableMoves(boolean isWhite) {
+		for(int r = 0; r < 8; r++) {
+			for(int c = 0; c < 8; c++) {
+				if (isValidMove(r, c, isWhite)) {
+					return true;
 				}
 			}
 		}
-		board[r][c] = new Tile(true, isWhite);
+		return false;
 	}
-
+	
+	
+	
+	
+	public boolean checkIfOver(boolean isWhite){
+		if(!availableMoves(isWhite)){
+			return true;
+		}
+		for(int r =0;r<length;r++){
+			for(int c = 0; c<width;c++){
+				if(board[r][c].isTaken()){
+					return false;
+				}
+			}
+		}
+		return true;
+		
+	}
 	public boolean isValidMove(int row, int col, boolean isWhite) {
 		// check whether this square is empty
 		if (board[row][col].isTaken()) {
@@ -183,11 +152,11 @@ public class Board {
 
 					break;
 				}
-
 				curRow += sOFFSET_MOVE_ROW[i];
 				curCol += sOFFSET_MOVE_COL[i];
 			}
 		}
 	}
+	
 
 }
