@@ -1,3 +1,5 @@
+
+
 public class Tile{
 	private boolean used;
 	private boolean isWhite;
@@ -25,6 +27,12 @@ public class Tile{
 	}
 	public boolean equals (Tile other) {
 		return (other.isTaken()&&this.isTaken())&&(other.isWhite()&&this.isWhite);
+	}
+	public void take(){
+		used = true;
+	}
+	public void changeIsWhite(boolean isWhite){
+		this.isWhite = isWhite;
 	}
 	public String toString(){
 		if(!used){
