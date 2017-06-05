@@ -74,9 +74,10 @@ public class OthelloGame{
 		else{
 			StdDraw.text(3.5, 7.7, "Current player: BLACK");
 		}
+		//print scores
 		StdDraw.text(3.5, -.8, "Black Score: " + board.getBlack() + "    White Score: " + board.getWhite());
 
-		StdDraw.show(0);
+		StdDraw.show(0);//enable double buffering
 
 	}
 
