@@ -1,98 +1,77 @@
 import java.awt.Font;
 
-
-
 public class OthelloGame{
 
 	private static boolean isWhite = false;
-	private Board board;
+	private static Board board;
 	private static boolean game;
 	public static void main(String[] args){
 		isWhite = false;
 		game = true;
 		Board board = new Board();
-		//System.out.println(board.isValidMove(5, 4, isWhite));
-		//board.effectMove(3, 2, isWhite);
-
-
-		/*for(int i =0;i<board.getLength();i++){
-			for(int z = 0;z<board.getWidth();z++){
-				System.out.print(board.getTile(i,z));
-			}
-			System.out.println();
-		}*/
-		//int i = 0;
-		
 		while(game){
 			draw(board, isWhite);
 			isWhite = handleMouseClick(isWhite,board);
 			if(board.checkIfOver(isWhite) && !(board.checkIfOver(!isWhite))){
+				StdDraw.text(3.5, 4, "NO VALID MOVES, SWAPPING PLAYER");
+				StdDraw.pause(500);
 				isWhite = !isWhite;
 			}
-			
+
 			else if(board.checkIfOver(isWhite)){
-				
 				System.out.println("le game over");
+				System.out.print("White Score: " + board.getWhite());
+				System.out.print("Black Score: " + board.getBlack());
+				draw(board, isWhite);
 				game = false;
 			}
-			//i++;
 		}
-		
-		
 	}
-	
-	public int checkScore(boolean isWhite) {
-		int score = 0;
-		for (int r = 0; r < 8; r++) {
-			for (int c = 0; c < 8; c++) {
-				if (board.getTile(r, c).isWhite() == isWhite) {
-					score++;
-				}
-			}
-		}
-		return score;
-	}
-	
+
 	public static void draw(Board board, boolean isWhite) {
 		// TODO You have to write this
 		StdDraw.clear();
 		StdDraw.setScale(-1,8);
-		
-		
-		for(int i =0;i<board.getLength();i++){
-			for(int c =0;c<board.getWidth();c++){
-				if(board.getTile(c,i).isWhite() && board.getTile(c, i).isTaken()){
+		for(int i =0;i<board.getLength();i++) {
+			for(int c =0;c<board.getWidth();c++) {
+				StdDraw.setPenColor(StdDraw.GREEN);
+				StdDraw.filledSquare(i, c, .5);
+				if(board.getTile(c,i).isWhite() && board.getTile(c, i).isTaken()) {
 					StdDraw.setPenColor(StdDraw.WHITE);
 				}
-				else if(board.getTile(c, i).isTaken() && !(board.getTile(c, i).isWhite())){
+				else if(board.getTile(c, i).isTaken() && !(board.getTile(c, i).isWhite())) {
 					StdDraw.setPenColor(StdDraw.BLACK);
 				}
-				else{
+				else {
 					StdDraw.setPenColor(StdDraw.GREEN);
 				}
 
-				
-				StdDraw.filledSquare(i,c, .5);
-				
+
+				StdDraw.filledCircle(i,c, .45);
+
 			}
 		}
 		StdDraw.setPenColor(StdDraw.BLACK);
+		for (int i = 0; i < 9; i++) {
+			StdDraw.line(-0.5 + i, -0.5, -0.5 + i, 7.5);
+		}
+		for (int i = 0; i < 9; i++) {
+			StdDraw.line(-0.5, -0.5 + i, 7.5, -0.5 + i);
+		}
 		if(isWhite){
 			StdDraw.text(3.5, 7.7, "Current player: WHITE");
 		}
 		else{
 			StdDraw.text(3.5, 7.7, "Current player: BLACK");
 		}
-		
-		StdDraw.text(2, -.8,"");
-	
-		
+		StdDraw.text(3.5, -.8, "Black Score: " + board.getBlack() + "    White Score: " + board.getWhite());
+
 		StdDraw.show(0);
-	
+
 	}
-	
-	
-	
+
+
+
 	public static boolean handleMouseClick(boolean isWhite, Board board) {
 		while (!StdDraw.mousePressed()) {
 			// Wait for mouse press
@@ -109,16 +88,14 @@ public class OthelloGame{
 			board.effectMove(b, a, isWhite);
 			return !isWhite;
 		}
-		
-		
 		/*else{
 			return isWhite;
 		}*/
 		System.out.println("Not valid");
 		return isWhite;
 	}
-	
-	
-	
-	
+
+
+
+
 }
