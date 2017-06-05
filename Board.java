@@ -2,7 +2,7 @@ import java.awt.List;
 import java.util.ArrayList;
 
 public class Board {
-	private Tile[][] board;
+	private static Tile[][] board;
 
 	private int length;
 	private int width;
@@ -73,9 +73,29 @@ public class Board {
 		return false;
 	}
 	
-	
-	
-	
+	public static int getWhite() {
+		int skor = 0;
+		for (int r = 0; r < 8; r++) {
+			for (int c = 0; c < 8; c++) {
+				if (board[r][c].isTaken() && board[r][c].isWhite()) {
+					skor++;
+				}
+			}
+		}
+		return skor;
+	}
+	public static int getBlack() {
+		int skor = 0;
+		for (int r = 0; r < 8; r++) {
+			for (int c = 0; c < 8; c++) {
+				if (board[r][c].isTaken() && !board[r][c].isWhite()) {
+					skor++;
+				}
+			}
+		}
+		return skor;
+	}
+
 	public boolean checkIfOver(boolean isWhite){
 		if(!availableMoves(isWhite)){
 			return true;
